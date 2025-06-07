@@ -1,9 +1,35 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axiosClient from "../../services/axiosClient";
+import { API_LOGIN } from "../../constant/Apis";
+import { useDispatch } from "react-redux";
+import { doLogin } from "../../store/feature/auth/authenSlice";
 
 export const Login = () => {
-  const handleChange = () => {};
-  const handleSubmit = () => {};
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [formLogin, setFormLogin] = useState({
+    email: "",
+    password: "",
+  });
+  const handleChange = (e) => {
+    const { value, name } = e.target;
+    setFormLogin({
+      ...formLogin,
+      [name]: value,
+    });
+  };
+  const handleSubmit = async () => {
+    try {
+      const res = await axiosClient.post(API_LOGIN, formLogin);
+
+      dispatch(doLogin(res.data));
+      navigate("/");
+    } catch (error) {
+      alert("Đăng nhập thất bại");
+      console.log(error);
+    }
+  };
   return (
     <>
       <section className="">
@@ -40,13 +66,13 @@ export const Login = () => {
                 <div className="flex justify-between ">
                   <Link
                     to={"/register"}
-                    class="text-xs mt-5 mb-5 block hover:underline"
+                    className="text-xs mt-5 mb-5 block hover:underline"
                   >
                     Register
                   </Link>
                   <Link
                     to={"/forgetpassword"}
-                    class="text-xs mt-5 mb-5 block hover:underline"
+                    className="text-xs mt-5 mb-5 block hover:underline"
                   >
                     Forgot password ?
                   </Link>
@@ -63,7 +89,7 @@ export const Login = () => {
           </div>
         </div>
       </section>
-      <section class="pt-12 pb-12"></section>
+      <section className="pt-12 pb-12"></section>
     </>
   );
 };

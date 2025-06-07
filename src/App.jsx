@@ -4,6 +4,8 @@ import { LayoutAccout } from "./layouts/LayoutAccount/LayoutAccout";
 import { Home } from "./pages/Account/Home/Home";
 import { Login } from "./pages/login/Login";
 import { Register } from "./pages/register/register";
+import { LayoutAdmin } from "./layouts/LayoutAdmin/LayoutAdmin";
+import AdminRouter from "./routes/AdminRouter";
 
 function App() {
   return (
@@ -36,6 +38,24 @@ function App() {
           </LayoutAccout>
         }
       ></Route>
+
+      {/* Admin */}
+      {/* <Route path="/admin" element={<LayoutAdmin />}>
+        <Route element={<AdminRouter />}>
+          <Route path="/dashboardadmin" element={"dashboardadmin"} />
+        </Route>
+      </Route> */}
+      <Route
+        path="/admin"
+        element={
+          <AdminRouter>
+            <LayoutAdmin />
+          </AdminRouter>
+        }
+      >
+        <Route path="dashboardadmin" element={"dashboardadmin"} />
+        <Route path="product" element={"product"} />
+      </Route>
     </Routes>
   );
 }

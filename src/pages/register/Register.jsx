@@ -1,13 +1,17 @@
-import axios from "axios";
+// import axios from "axios";
 import React, { useState } from "react";
 import { API_REGISTER } from "../../constant/Apis";
+import axiosClient from "../../services/axiosClient";
+import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
+  const navigate = useNavigate();
   const [formRegister, setFormRegister] = useState({
     name: "",
     email: "",
     password: "",
   });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormRegister({
@@ -18,9 +22,14 @@ export const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(API_REGISTER, formRegister);
+      const res = await axiosClient.post(API_REGISTER, formRegister);
       console.log(res, "ressss");
-    } catch (err) {}
+      if (res.status === 201) {
+        navigate("/login");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <>
