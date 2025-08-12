@@ -1,11 +1,13 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { LayoutAccout } from "./layouts/LayoutAccount/LayoutAccout";
+
 import { Home } from "./pages/Account/Home/Home";
 import { Login } from "./pages/login/Login";
 import { Register } from "./pages/register/register";
-import { LayoutAdmin } from "./layouts/LayoutAdmin/LayoutAdmin";
+
 import AdminRouter from "./routes/AdminRouter";
+import LayoutAdmin from "./layouts/LayoutAdmin/LayoutAdmin";
+import { LayoutAccount } from "./layouts/LayoutAccount/LayoutAccount";
 
 function App() {
   return (
@@ -13,29 +15,29 @@ function App() {
       <Route
         path="/"
         element={
-          <LayoutAccout>
+          <LayoutAccount>
             <Home />
-          </LayoutAccout>
+          </LayoutAccount>
         }
       ></Route>
       <Route
         path="/products"
-        element={<LayoutAccout>Product</LayoutAccout>}
+        element={<LayoutAccount>Product</LayoutAccount>}
       ></Route>
       <Route
         path="/login"
         element={
-          <LayoutAccout>
+          <LayoutAccount>
             <Login />
-          </LayoutAccout>
+          </LayoutAccount>
         }
       ></Route>
       <Route
         path="/register"
         element={
-          <LayoutAccout>
+          <LayoutAccount>
             <Register />
-          </LayoutAccout>
+          </LayoutAccount>
         }
       ></Route>
 
@@ -48,13 +50,15 @@ function App() {
       <Route
         path="/admin"
         element={
-          <AdminRouter>
-            <LayoutAdmin />
-          </AdminRouter>
+          // <AdminRouter>
+          <LayoutAdmin />
+          // </AdminRouter>
         }
       >
-        <Route path="dashboardadmin" element={"dashboardadmin"} />
-        <Route path="product" element={"product"} />
+        <Route element={<LayoutAdmin />}>
+          <Route path="" element={"dsad"} />
+          <Route path="product" element={"Product"} />
+        </Route>
       </Route>
     </Routes>
   );
