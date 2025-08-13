@@ -1,6 +1,6 @@
 import axios from "axios";
 import { store } from "../store/store";
-import { logout } from "../store/feature/auth/authenSlice";
+import { doLogin, logout } from "../store/feature/auth/authenSlice";
 const BASE_URL = "http://localhost:3100";
 const rawAxios = axios.create({
   baseURL: BASE_URL,
@@ -46,7 +46,7 @@ axiosClient.interceptors.response.use(
         const res = await rawAxios.post("/auth/refresh");
         const { accessToken, user } = res.data;
 
-        store.dispatch(setCredentials({ user, accessToken }));
+        store.dispatch(doLogin({ user, accessToken }));
         originalRequest.headers = {
           ...originalRequest.headers,
           Authorization: `Bearer ${accessToken}`,
@@ -57,6 +57,7 @@ axiosClient.interceptors.response.use(
         return Promise.reject(refreshError);
       }
     }
+    return Promise.reject(error);
   }
 );
 

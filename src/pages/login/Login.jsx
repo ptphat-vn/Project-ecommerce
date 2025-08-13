@@ -4,6 +4,7 @@ import axiosClient from "../../services/axiosClient";
 import { API_LOGIN } from "../../constant/Apis";
 import { useDispatch } from "react-redux";
 import { doLogin } from "../../store/feature/auth/authenSlice";
+import { toast } from "react-toastify";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -19,17 +20,26 @@ export const Login = () => {
       [name]: value,
     });
   };
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
       const res = await axiosClient.post(API_LOGIN, formLogin);
-
       dispatch(doLogin(res.data));
+      toast.success("Đăng nhập thành công", {
+        autoClose: 1000,
+        position: "top-right",
+      });
       navigate("/");
-    } catch (error) {
-      alert("Đăng nhập thất bại");
-      console.log(error);
+    } catch (err) {
+      toast.error("Đăng nhập thất bại", {
+        autoClose: 1000,
+        position: "top-right",
+      });
+      console.error(err);
     }
   };
+  // console.log(formLogin);
+
   return (
     <>
       <section className="">
@@ -43,6 +53,7 @@ export const Login = () => {
                 <div>
                   <input
                     id="email"
+                    name="email"
                     type="email"
                     className="mt-2 w-full h-[50px] border border-gray p-5 rounded-lg text-[14px]"
                     placeholder="Email*"
@@ -57,6 +68,7 @@ export const Login = () => {
                   <input
                     id="password"
                     type="password"
+                    name="password"
                     className="mt-2 w-full h-[50px] border border-gray p-5 rounded-lg text-[14px]"
                     placeholder="Password*"
                     onChange={handleChange}

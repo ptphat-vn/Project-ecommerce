@@ -5,8 +5,11 @@ import ico_user from "../../assets/images/ico_user.png";
 import ico_heart from "../../assets/images/ico_heart.png";
 import ico_bag from "../../assets/images/ico_bag.png";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import ToogleAccountMenu from "../Toogle/ToogleAccountMenu";
 
 export const Navbar = () => {
+  const { accessToken } = useSelector((state) => state.auth);
   return (
     <div className="container flex items-center">
       <h1 className="flex-shrink-0 mr-5">
@@ -52,9 +55,14 @@ export const Navbar = () => {
         <Link to="/search" className="lg:hidden">
           <img className="size-5" src={ico_search} alt="" />
         </Link>
-        <Link to="/login">
-          <img className="size-5" src={ico_user} alt="" />
-        </Link>
+        {accessToken ? (
+          <ToogleAccountMenu />
+        ) : (
+          <Link to="/login">
+            <img className="size-5" src={ico_user} alt="" />
+          </Link>
+        )}
+
         <Link to="/wishlist" className="relative">
           <span className="absolute -top-[8px] -right-[10px] size-[18px] bg-black text-white rounded-full text-xs grid place-items-center">
             10
