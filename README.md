@@ -1,12 +1,77 @@
-# React + Vite
+# Project Ecommerce
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Website thương mại điện tử hiện đại, xây dựng với **ReactJS**, **Vite**, **Redux Toolkit**, **Material UI**, **TailwindCSS** và các thư viện mới nhất.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Tính năng nổi bật
 
-## Expanding the ESLint configuration
+- Đăng ký, đăng nhập, quên mật khẩu, xác thực người dùng
+- Trang chủ, xem sản phẩm, tìm kiếm, phân trang
+- Quản trị viên: quản lý sản phẩm, danh mục, dashboard thống kê
+- Giao diện responsive, tối ưu trải nghiệm người dùng
+- Thông báo realtime với React Toastify
+- Biểu đồ trực quan với Recharts
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠️ Công nghệ sử dụng
+
+- [ReactJS](https://react.dev/)
+- [Vite](https://vitejs.dev/)
+- [Redux Toolkit](https://redux-toolkit.js.org/)
+- [React Router v6](https://reactrouter.com/)
+- [Material UI](https://mui.com/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [Recharts](https://recharts.org/)
+- [React Toastify](https://fkhadra.github.io/react-toastify/)
+
+---
+
+## 📦 Cài đặt & chạy dự án
+
+```bash
+git clone https://github.com/your-username/project-ecommerce.git
+cd project-ecommerce
+npm install
+npm run dev
+```
+
+Truy cập [http://localhost:5173](http://localhost:5173) trên trình duyệt.
+
+---
+
+## 🗂️ Cấu trúc thư mục
+
+```
+src/
+  ├── components/         # Component dùng chung
+  ├── layouts/            # Layout cho Admin, Account
+  ├── pages/              # Các trang chính (Home, Login, Admin, ...)
+  ├── routes/             # Định nghĩa route
+  ├── services/           # Gọi API, axios config
+  ├── store/              # Redux store, slice
+  ├── constant/           # Các hằng số, API endpoint
+  └── App.jsx             # File App chính
+```
+
+---
+
+## 📌 Lưu ý
+
+- Để sử dụng dashboard, cần cài thêm recharts:
+  ```bash
+  npm install recharts
+  ```
+- Các API hiện tại đang sử dụng dữ liệu giả (mock), bạn có thể tích hợp API thật khi backend sẵn sàng.
+
+---
+
+## 👨‍💻 Đóng góp & liên hệ
+
+- Đội ngũ phát triển: ptphat-vn
+- Liên hệ: [tanphatphan091@gmail.com]
+
+---
+
+Cảm ơn bạn đã sử dụng sản phẩm của chúng tôi!
