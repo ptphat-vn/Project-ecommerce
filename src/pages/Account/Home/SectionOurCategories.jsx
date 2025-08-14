@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import img_collection from "../../../assets/images/img_collection.jpg";
-import img_collection2 from "../../../assets/images/img_collection2.webp";
-import img_collection3 from "../../../assets/images/img_collection3.webp";
+import useGetListCate from "../../../hooks/useGetListCategory";
+
 export const SectionOurCategories = () => {
+  const { data } = useGetListCate({ limit: 10, page: 1 });
+  const categories = data?.data || [];
+  const [start, setStart] = useState(0);
+  const visibleCount = 3;
+
+  const handlePrev = () => {
+    setStart((prev) => Math.max(prev - 1, 0));
+  };
+
+  const handleNext = () => {
+    setStart((prev) => Math.min(prev + 1, categories.length - visibleCount));
+  };
+
   return (
     <section className="mt-8 lg:mt-24">
-      <div className="container">
+      <div className="container mx-auto px-4">
         <div className="lg:flex justify-between items-center">
           <h2 className="text-3xl font-bold">Our Categories</h2>
           <Link
@@ -17,41 +29,56 @@ export const SectionOurCategories = () => {
           </Link>
         </div>
 
-        <ul className="mt-10 md:grid grid-cols-3 gap-10 cursor-pointer">
-          <li>
-            <div className="rounded-[20px] overflow-hidden relative group">
-              <img className="image" src={img_collection} alt="" />
-              <Link
-                to={"/"}
-                className="absolute group-hover:bottom-10 left-1/2 -translate-x-1/2 -bottom-10 mt-8 h-9 bg-white px-7 inline-flex items-center font-semibold text-black rounded-full text-[15px] hover:bg-black hover:text-white transition-all duration-300"
-              >
-                Living Room
-              </Link>
-            </div>
-          </li>
-          <li className="mt-6 md:mt-0">
-            <div className="rounded-[20px] overflow-hidden relative group">
-              <img className="image" src={img_collection2} alt="" />
-              <Link
-                to={"/"}
-                className="absolute group-hover:bottom-10 left-1/2 -translate-x-1/2 -bottom-10 mt-8 h-9 bg-white px-7 inline-flex items-center font-semibold text-black rounded-full text-[15px] hover:bg-black hover:text-white transition-all duration-300"
-              >
-                Lamp
-              </Link>
-            </div>
-          </li>
-          <li className="mt-6 md:mt-0">
-            <div className="rounded-[20px] overflow-hidden relative group">
-              <img className="image" src={img_collection3} alt="" />
-              <Link
-                to={"/"}
-                className="absolute group-hover:bottom-10 left-1/2 -translate-x-1/2 -bottom-10 mt-8 h-9 bg-white px-7 inline-flex items-center font-semibold text-black rounded-full text-[15px] hover:bg-black hover:text-white transition-all duration-300"
-              >
-                Deco
-              </Link>
-            </div>
-          </li>
-        </ul>
+        <div className="relative mt-10 overflow-hidden">
+          <button
+            onClick={handlePrev}
+            disabled={start === 0}
+            className="absolute left-[2px] top-1/2 -translate-y-1/2 bg-white border rounded-full w-10 h-10 flex items-center justify-center shadow hover:bg-gray-100 disabled:opacity-50 z-10"
+          >
+            <span>&lt;</span>
+          </button>
+          <div className="overflow-hidden w-full px-4">
+            <ul
+              className="flex gap-7 transition-transform duration-500 ease-in-out"
+              style={{
+                transform: `translateX(-${start * (100 / visibleCount)}%)`,
+              }}
+            >
+              {categories.map((item, index) => (
+                <li
+                  key={item._id || index}
+                  className="w-full md:w-1/3 flex-shrink-0"
+                  style={{
+                    maxWidth: "calc(100% / 3 - 16px)",
+                  }}
+                >
+                  <div className="rounded-2xl overflow-hidden relative group shadow-lg hover:shadow-2xl transition-shadow duration-300 bg-white h-full">
+                    <div className="w-full max-w-[300px] mx-auto">
+                      <img
+                        className="w-full aspect-square object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                        src={item.image}
+                        alt={item.name}
+                      />
+                    </div>
+                    <Link
+                      to={"/"}
+                      className="absolute left-1/2 -translate-x-1/2 bottom-6 opacity-90 group-hover:opacity-100 bg-white px-7 py-2 inline-flex items-center font-semibold text-black rounded-full text-[15px] shadow-md hover:bg-black hover:text-white transition-all duration-300"
+                    >
+                      {item.name}
+                    </Link>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <button
+            onClick={handleNext}
+            disabled={start + visibleCount >= categories.length}
+            className="absolute right-[2px] top-1/2 -translate-y-1/2 bg-white border rounded-full w-10 h-10 flex items-center justify-center shadow hover:bg-gray-100 disabled:opacity-50 z-10"
+          >
+            <span>&gt;</span>
+          </button>
+        </div>
       </div>
     </section>
   );

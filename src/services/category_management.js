@@ -13,7 +13,7 @@ export const getAllCategories = async (params) => {
 };
 
 export const createCategories = async (data) => {
-  return await axiosClient.post(API_CREATE_CATE, { data });
+  return await axiosClient.post(API_CREATE_CATE, data);
 };
 
 export const getDetailCategory = async (id) => {

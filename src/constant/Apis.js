@@ -6,9 +6,9 @@ export const API_LOGOUT = "/auth/logout";
 //category
 export const API_CREATE_CATE = "/categories";
 export const API_GET_LIST_CATE = "/categories";
-export const API_DETAIL_CATE_BY_ID = "/categories/:id";
-export const API_UPDATE_CATE_BY_ID = "/categories/:id";
-export const API_REMOVE_CATE_BY_ID = "/categories/:id";
+export const API_DETAIL_CATE_BY_ID = "/categories/id";
+export const API_UPDATE_CATE_BY_ID = "/categories/id";
+export const API_REMOVE_CATE_BY_ID = "/categories/id";
 
 //product
 export const API_GET_LIST_PRODUCT = "/products";
