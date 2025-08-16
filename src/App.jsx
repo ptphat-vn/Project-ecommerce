@@ -13,6 +13,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import Dashboard from "./pages/Admin/Dashboard";
 import { CategoryManagerment } from "./pages/Admin/CategoryManagerment/CategoryManagerment";
+import { ProductManagement } from "./pages/Admin/ProductManagerment/ProductManagement";
+import { AddProduct } from "./pages/Admin/ProductManagerment/AddProduct";
 
 function App() {
   const { accessToken } = useSelector((state) => state.auth);
@@ -75,8 +77,8 @@ function App() {
           <Route element={<LayoutAdmin />}>
             <Route index element={<Dashboard />} />
             <Route path="categories" element={<CategoryManagerment />} />
-            <Route path="products" element={<h1>Products</h1>} />
-            <Route path="products/add" element={<h1>Add Product</h1>} />
+            <Route path="products" element={<ProductManagement />} />
+            <Route path="products/add" element={<AddProduct />} />
           </Route>
         </Route>
       </Routes>

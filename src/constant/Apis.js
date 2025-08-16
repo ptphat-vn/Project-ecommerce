@@ -13,10 +13,10 @@ export const API_REMOVE_CATE_BY_ID = "/categories/id";
 //product
 export const API_GET_LIST_PRODUCT = "/products";
 export const API_CREATE_PRODUCT = "/products";
-export const API_DETAIL_PRODUCT_BY_ID = "/products/:id";
-export const API_UPDATE_PRODUCT_BY_ID = "/products/:id";
-export const API_REMOVE_PORUDCT_BY_ID = "/products/:id";
-export const API_GET_PRODUCT_BY_CATE = "/products/category/:categoryId";
+export const API_DETAIL_PRODUCT_BY_ID = "/products/id";
+export const API_UPDATE_PRODUCT_BY_ID = "/products/id";
+export const API_REMOVE_PORUDCT_BY_ID = "/products/id";
+export const API_GET_PRODUCT_BY_CATE = "/products/category/categoryId";
 export const API_UPLOAD_PRODUCT = "/products/upload";
 
 // carts
